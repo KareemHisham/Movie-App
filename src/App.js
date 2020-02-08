@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import React from "react";
+import "./App.css";
 
-import './App.css';
+import Home from "./pages/Home";
+import Rooms from "./pages/Rooms";
+import SingleRoom from "./pages/SingleRoom";
+import Error from "./pages/Error";
 
-import Navbar from './Components/layout/Navbar';
-import Footer from './Components/layout/Footer';
+import Navbar from "./components/Navbar";
 
-import Landing from './Components/home/Landing';
-import Movie from './Components/home/Movie';
+import { Switch, Route } from "react-router-dom";
 
-import store from './store';
-
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <div>
-            <Navbar />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/movie/:id" component={Movie} />
-            <Footer />
-          </div>
-        </Router>
-      </Provider>
-    );
-  }
+function App() {
+  return (
+    <>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/rooms/" component={Rooms} />
+        <Route exact path="/rooms/:slug" component={SingleRoom} />
+        <Route component={Error} />
+      </Switch>
+    </>
+  );
 }
 
 export default App;
